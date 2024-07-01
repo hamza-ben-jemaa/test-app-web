@@ -1,0 +1,57 @@
+Showing 2 changed files with 7 additions and 3 deletions.
+Filter changed files
+  2 changes: 1 addition & 1 deletion2  
+README.md
+Copied!
+Original file line number	Diff line number	Diff line change
+@@ -22,7 +22,7 @@ After cloning the files, you will have to run ```yarn``` followed by ```yarn sta
+### 3. Add your own data 
+Change the data in the ```data.json``` file as well as add any images to ```public/img/```
+You can also change styles by modifying the ```public/css``` files.
+
+If you need the contact form to work, you also need to create an EmailJS account, and modify the ```src/components/contact.jsx``` file to replace your own service ID, template ID and Public Key
+
+## Like this project?
+<a href="https://www.buymeacoffee.com/issaaf">Buy my a coffee ☕️</a>
+  8 changes: 6 additions & 2 deletions8  
+src/components/contact.jsx
+Original file line number	Diff line number	Diff line change
+@@ -15,12 +15,16 @@ export const Contact = (props) => {
+    setState((prevState) => ({ ...prevState, [name]: value }));
+  };
+  const clearState = () => setState({ ...initialState });
+
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(name, email, message);
+
+    {/* replace below with your own Service ID, Template ID and Public Key from your EmailJS account */ }
+
+    emailjs
+      .sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", e.target, "YOUR_USER_ID")
+      .sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", e.target, "YOUR_PUBLIC_KEY")
+      .then(
+        (result) => {
+          console.log(result.text);
+          clearState();
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+  };
+  return (
+    <div>
+      <div id="contact">
+        <div className="container">
+          <div className="col-md-8">
+            <div className="row">
+              <div className="section-title">
+                <h2>Get In Touch</h2>
+                <p>
+                  Please fill out the form below to send us an email and we will
+                  get back to you as soon as possible.
+                </p>
+              </div>
